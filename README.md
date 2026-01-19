@@ -99,6 +99,7 @@ cp .env.example .env
 ### 2. Fine-tune Llama-2 with LoRA (SFTTrainer)
 **Open:**
 - `notebooks/02_Finetune_LLama.ipynb`
+
 **What it does:**
 - Loads processed JSONL
 - Formats instruction prompts for summarization
@@ -108,6 +109,7 @@ cp .env.example .env
 ### 3. Inference (generate summaries)
 **Open:**
 - `notebooks/03_Llama_inference.ipynb`
+
 **What it does:**
 - Loads base model + LoRA weights
 - Reads a judgment text file (example: `1953_L_1.txt`)
@@ -120,6 +122,7 @@ cp .env.example .env
 ### 4. RAG pipeline
 **Open:**
 - `notebooks/04_RAG_Pipeline.ipynb`
+
 **What it does:**
 - Builds TF-IDF vectors for judgments from processed JSONL
 - Indexes them with FAISS
