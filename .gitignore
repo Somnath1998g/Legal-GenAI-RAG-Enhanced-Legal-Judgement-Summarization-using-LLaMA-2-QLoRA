@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Env
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Outputs (avoid committing huge files)
+data/raw/
+data/processed/
+models/
+results/
+
+# OS
+.DS_Store
+Thumbs.db
