@@ -49,15 +49,15 @@ legal-llama-summarization/
 └─ README.md
 ```
 ## ✅ Requirements
-- **Python 3.9+
-- **NVIDIA GPU recommended for training (inference may work on CPU, but will be slow)
+- Python 3.9+
+- NVIDIA GPU recommended for training (inference may work on CPU, but will be slow)
 Main libraries:
-- **transformers, datasets, trl, peft, bitsandbytes
-- **For RAG: faiss-cpu, scikit-learn
+- ``transformers``, ``datasets``, ``trl``, ``peft``, ``bitsandbytes``
+- For RAG: ``faiss-cpu``, ``scikit-learn``
 ## 🔐 Hugging Face Access (Llama-2)
 1. Have access approved on Hugging Face for the Llama-2 model repo
 2. Use a Hugging Face token with access
-Create a .env file (see .env.example) and set:
+Create a ``.env`` file (see ``.env.example``) and set:
 ```bash
 HF_TOKEN=your_huggingface_token_here
 ```
@@ -83,16 +83,95 @@ cp .env.example .env
 ```
 ## 🧪 Notebooks workflow (recommended order)
 ### 1. Data preprocessing
-Open:
-- **notebooks/01_Data_preprocessing.ipynb
-What it does:
-- **Reads judgments from data/raw/IN-Ext/judgement/
-- **Reads summaries from data/raw/IN-Ext/summary/full/ and segment-wise/
-- **Writes JSONL to data/processed/processed-IN-Ext/
-  Output example:
-- **full_summaries_A1.jsonl
-- **full_summaries_A2.jsonl
+**Open:**
+- notebooks/01_Data_preprocessing.ipynb
+**What it does:**
+- Reads judgments from `data/raw/IN-Ext/judgement/`
+- Reads summaries from `data/raw/IN-Ext/summary/full/ and segment-wise/`
+- Writes JSONL to `data/processed/processed-IN-Ext/`
+  **Output example:**
+- `full_summaries_A1.jsonl`
+- `full_summaries_A2.jsonl`
 ### 2. Fine-tune Llama-2 with LoRA (SFTTrainer)
+**Open:**
+- `notebooks/02_Finetune_LLama.ipynb`
+**What it does:**
+- Loads processed JSONL
+- Formats instruction prompts for summarization
+- Fine-tunes LoRA adapters using TRL `SFTTrainer`
+- saves to:
+  - `models/fine_tuned_lora_model/` (LoRA model output)
+### 3. Inference (generate summaries)
+**Open:**
+- `notebooks/03_Llama_inference.ipynb`
+**What it does:**
+- Loads base model + LoRA weights
+- Reads a judgment text file (example: `1953_L_1.txt`)
+- Generates a summary with a prompt like:
 ```text
-Open:
-- **notebooks/02_Finetune_LLama.ipynb
+### Instruction: Summarize the following legal judgment:
+...
+### Response:
+```
+### 4. RAG pipeline
+**Open:**
+- `notebooks/04_RAG_Pipeline.ipynb`
+**What it does:**
+- Builds TF-IDF vectors for judgments from processed JSONL
+- Indexes them with FAISS
+- Summarizes retrieved judgments using the LoRA-tuned model
+## Example `requirements.txt`
+(Your notebooks use these libs; update versions if needed for your setup.)
+```txt
+torch
+transformers
+datasets
+trl
+peft
+bitsandbytes
+huggingface_hub
+python-dotenv
+tqdm
+numpy
+scikit-learn
+faiss-cpu
+```
+## Tips (VRAM + stability)
+- Prefer LoRA + `bitsandbytes` for lower memory usage
+- Use small batch size + gradient accumulation
+- Save adapters frequently if running in limited environments (Kaggle / Colab)
+## 📌 Notes
+## Notes
+
+- Paths in notebooks may need updating to match this repo layout.
+- Large datasets and trained weights should **NOT** be committed to Git.
+  - Put raw data in `data/raw/`
+  - Put outputs in `data/processed/`, `models/`, and `results/`
+## 📜 License
+Choose a license (MIT recommended for most open-source projects).
+```yaml
+
+---
+
+## A good `.gitignore` (recommended)
+
+```gitignore
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data / models / outputs (do not commit)
+data/raw/
+data/processed/
+models/
+results/
+
+# OS
+.DS_Store
+Thumbs.db
+```
