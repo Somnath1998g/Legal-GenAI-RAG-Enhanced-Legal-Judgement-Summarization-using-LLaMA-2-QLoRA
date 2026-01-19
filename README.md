@@ -47,3 +47,52 @@ legal-llama-summarization/
 ├─ .env.example
 ├─ .gitignore
 └─ README.md
+```
+## ✅ Requirements
+- **Python 3.9+
+- **NVIDIA GPU recommended for training (inference may work on CPU, but will be slow)
+Main libraries:
+- **transformers, datasets, trl, peft, bitsandbytes
+- **For RAG: faiss-cpu, scikit-learn
+## 🔐 Hugging Face Access (Llama-2)
+1. Have access approved on Hugging Face for the Llama-2 model repo
+2. Use a Hugging Face token with access
+Create a .env file (see .env.example) and set:
+```bash
+HF_TOKEN=your_huggingface_token_here
+```
+## 🚀 Setup
+```bash
+# 1) Clone
+git clone <your-repo-url>
+cd legal-llama-summarization
+
+# 2) Create environment
+python -m venv .venv
+# Linux/Mac:
+source .venv/bin/activate
+# Windows:
+# .venv\Scripts\activate
+
+# 3) Install deps
+pip install -r requirements.txt
+
+# 4) Create env file
+cp .env.example .env
+# edit .env and set HF_TOKEN
+```
+## 🧪 Notebooks workflow (recommended order)
+### 1. Data preprocessing
+Open:
+- **notebooks/01_Data_preprocessing.ipynb
+What it does:
+- **Reads judgments from data/raw/IN-Ext/judgement/
+- **Reads summaries from data/raw/IN-Ext/summary/full/ and segment-wise/
+- **Writes JSONL to data/processed/processed-IN-Ext/
+  Output example:
+- **full_summaries_A1.jsonl
+- **full_summaries_A2.jsonl
+### 2. Fine-tune Llama-2 with LoRA (SFTTrainer)
+```text
+Open:
+- **notebooks/02_Finetune_LLama.ipynb
