@@ -85,8 +85,9 @@ cp .env.example .env
 ### 1. Data preprocessing
 **Open:**
 - notebooks/01_Data_preprocessing.ipynb
+
 **Data:**
-- Download the dataset from [Zenodo](https://zenodo.org/records/7152317#.ZCSfaoTMI2y)
+- Download the dataset from [Zenodo](https://zenodo.org/records/7152317#.ZCSfaoTMI2y).
 
 **What it does:**
 - Reads judgments from `data/raw/IN-Ext/judgement/`
