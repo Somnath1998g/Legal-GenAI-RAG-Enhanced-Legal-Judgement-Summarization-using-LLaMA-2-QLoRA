@@ -93,6 +93,7 @@ cp .env.example .env
 - Reads judgments from `data/raw/IN-Ext/judgement/`
 - Reads summaries from `data/raw/IN-Ext/summary/full/ and segment-wise/`
 - Writes JSONL to `data/processed/processed-IN-Ext/`
+
   **Output example:**
 - `full_summaries_A1.jsonl`
 - `full_summaries_A2.jsonl`
