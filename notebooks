@@ -1,0 +1,5 @@
+├─ notebooks/
+│  ├─ 01_Data_preprocessing.ipynb
+│  ├─ 02_Finetune_LLama.ipynb
+│  ├─ 03_Llama_inference.ipynb
+│  └─ 04_RAG_Pipeline.ipynb
