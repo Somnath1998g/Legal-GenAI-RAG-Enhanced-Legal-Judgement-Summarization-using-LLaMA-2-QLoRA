@@ -1,0 +1,12 @@
+torch
+transformers
+datasets
+trl
+peft
+bitsandbytes
+huggingface_hub
+python-dotenv
+tqdm
+numpy
+scikit-learn
+faiss-cpu
