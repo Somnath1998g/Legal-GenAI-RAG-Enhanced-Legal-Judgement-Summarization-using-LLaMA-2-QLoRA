@@ -1,0 +1,2 @@
+# .env.example
+HF_TOKEN=replace_me_with_your_huggingface_token
